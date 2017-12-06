@@ -27,7 +27,8 @@
 
         <div id="animals-view"></div>
 
-        <div id="buttons-view"></div> <!-- put this on the bottom later -->
+        <div id="buttons-view"></div>
+        <!-- put this on the bottom later -->
 
         <form id="animal-form">
             <label for="animal-input">Add an Animal Bro</label>
@@ -42,7 +43,7 @@
 
             var animals = ["Cat", "Dog", "Bird", "Beaver", "Platypus"];
 
-// ---------------------------------------------
+            // ---------------------------------------------
 
             // Display Info *** ONLY THING NEEDED
 
@@ -54,30 +55,47 @@
                 $.ajax({
                     url: queryURL,
                     method: "GET"
-                }).done(function(response) {
-                    
-                    var animalDiv = $("<div class='animal'>"); // **
-                    
-                    var pRating = $("<p>").text("Rated: " + response.data[0].rating); 
-                    animalDiv.append(pRating);
+                }).done(function (response) {
+                    // Loop to make 10 gifs
+                    for (var i = 0; i < 10; i++) {
 
-                    var pGif = $("<img>").attr("src", response.data[0].images.original.url); // add an attr with its own id for stop go clicking
-                    animalDiv.append(pGif);
+                        var animalDiv = $("<div class='animalGif'>"); // **
 
-                    $("#animals-view").append(animalDiv); // **
+                        var pRating = $("<p>").text("Rated: " + response.data[i].rating);
+                        animalDiv.append(pRating);
+
+                        var pGif = $("<img>").attr("src", response.data[i].images.original.url);
+                        pGif.attr("data-reverse", response.data[i].images.original_still.url);
+                        animalDiv.append(pGif);
+
+                        $("#animals-view").append(animalDiv); // **
+                    }
                 });
             }
 
-// ---------------------------------------------
-           
+            // WORKING
+            // Checks if an img clicked, runs function
+            $('body').on('click', 'img', function () {  // HERE NOW ONLY FOR TEST MOVE TO BOTTOM LATER
+
+                var reverseData = $(this).data().reverse;
+                $(this).attr("data-reverse", this.src);
+                //console.log(this.reverse);
+                //$(this).attr('src', reverseData);
+                this.src = reverseData;
+                // WORK FIRST TIME AROUND .. I THINK ITS ADDING ANOTHER DATA REVERSE AND USING THE FIRST ONE STILL
+            });
+
+
+            // ---------------------------------------------
+
             // Render Buttons
 
             function renderButtons() {
                 $("#buttons-view").empty();
 
-                for(var i = 0; i < animals.length; i++) {
+                for (var i = 0; i < animals.length; i++) {
                     var a = $("<button>");
-                    
+
                     a.addClass("animal");
                     a.attr("data-name", animals[i]);
                     a.text(animals[i]);
@@ -85,20 +103,20 @@
                 }
             }
 
-// ---------------------------------------------
-           
+            // ---------------------------------------------
+
             // Trigger AJAX call on click
 
             $("#find-animal").on("click", function (event) {
-                
+
                 event.preventDefault();
                 var animal = $("#animal-input").val().trim();
                 animals.push(animal);
-                
+
                 renderButtons();
             });
 
-// ---------------------------------------------
+            // ---------------------------------------------
 
             $(document).on("click", ".animal", displayAnimalInfo);
 
