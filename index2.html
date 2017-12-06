@@ -61,10 +61,8 @@
                     var pRating = $("<p>").text("Rated: " + response.data[0].rating); 
                     animalDiv.append(pRating);
 
-                    //$("#animals-view").text(JSON.stringify(response));
-                    //$("#animals-view").text(rating)
-                    //console.log(response.data[0].rating); // THIS IS WORKING!!!!!!!!!!!!!
-                    //renderButtons();
+                    var pGif = $("<img>").attr("src", response.data[0].images.original.url); // add an attr with its own id for stop go clicking
+                    animalDiv.append(pGif);
 
                     $("#animals-view").append(animalDiv); // **
                 });
