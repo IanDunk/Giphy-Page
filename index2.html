@@ -27,7 +27,7 @@
 
         <div id="animals-view"></div>
 
-        <div id="gifs-view"></div> <!-- put this on the bottom later -->
+        <div id="buttons-view"></div> <!-- put this on the bottom later -->
 
         <form id="animal-form">
             <label for="animal-input">Add an Animal Bro</label>
@@ -40,14 +40,30 @@
 
         <script>
 
+            var animals = ["Cat", "Dog", "Bird", "Beaver", "Platypus"];
+
+// ---------------------------------------------
+
+            function displayAnimalInfo() {
+                var animal = $(this).attr("data-name");
+                // constructing URL
+                var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=WOaFdtza6XVcrCuwcwTMkOM7JLBjEY1v&q=" + animal + "&limit=25&offset=0&rating=G&lang=en";
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).done(function(response) {
+                    $("#animals-view").text(JSON.stringify(response));
+                    renderButtons();
+                });
+            }
+
 // ---------------------------------------------
            
-            // ALL GOOD BABY
-
-            var animals = ["Cat", "Dog", "Bird", "Beaver", "Platapus"];
+            // Render Buttons
 
             function renderButtons() {
-                $("#animals-view").empty();
+                $("#buttons-view").empty();
 
                 for(var i = 0; i < animals.length; i++) {
                     var a = $("<button>");
@@ -55,41 +71,25 @@
                     a.addClass("animal");
                     a.attr("data-name", animals[i]);
                     a.text(animals[i]);
-                    $("#animals-view").append(a);
+                    $("#buttons-view").append(a);
                 }
             }
 
 // ---------------------------------------------
            
-            // ALL GOOD BABY
             // Trigger AJAX call on click
             $("#find-animal").on("click", function (event) {
                 
                 event.preventDefault();
                 var animal = $("#animal-input").val().trim();
                 animals.push(animal);
-                // constructing URL
-                //var queryURL = "https://www.omdbapi.com/?t=" + animal + "&y=&plot=short&apikey=trilogy";
-                var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=WOaFdtza6XVcrCuwcwTMkOM7JLBjEY1v&q=" + animal + "&limit=25&offset=0&rating=G&lang=en";
-
-                //$.ajax({
-                //    url: queryURL,
-                //    method: "GET"
-                //}).done(function (response) {
-                //    $("#animals-view").text(JSON.stringify(response));
-                //});
+                
                 renderButtons();
             });
 
 // ---------------------------------------------
 
-            function alertAnimalName() {
-                var animalName = $(this).attr("data-name");
-
-                alert(animalName);
-            }
-
-            $(document).on("click", ".animal", alertAnimalName);
+            $(document).on("click", ".animal", displayAnimalInfo);
 
             renderButtons();
 
