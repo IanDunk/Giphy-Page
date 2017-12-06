@@ -40,23 +40,50 @@
 
         <script>
 
+// ---------------------------------------------
+           
+            // ALL GOOD BABY
+
+            var animals = ["Cat", "Dog", "Bird", "Beaver", "Platapus"];
+
+            function renderButtons() {
+                $("#animals-view").empty();
+
+                for(var i = 0; i < animals.length; i++) {
+                    var a = $("<button>");
+                    
+                    a.addClass("animal");
+                    a.attr("data-name", animals[i]);
+                    a.text(animals[i]);
+                    $("#animals-view").append(a);
+                }
+            }
+
+// ---------------------------------------------
+           
+            // ALL GOOD BABY
             // Trigger AJAX call on click
             $("#find-animal").on("click", function (event) {
                 
                 event.preventDefault();
-                var animal = $("#animal-input").val();
+                var animal = $("#animal-input").val().trim();
+                animals.push(animal);
                 // constructing URL
                 //var queryURL = "https://www.omdbapi.com/?t=" + animal + "&y=&plot=short&apikey=trilogy";
                 var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=WOaFdtza6XVcrCuwcwTMkOM7JLBjEY1v&q=" + animal + "&limit=25&offset=0&rating=G&lang=en";
 
-                $.ajax({
-                    url: queryURL,
-                    method: "GET"
-                }).done(function (response) {
-                    $("#animals-view").text(JSON.stringify(response));
-                });
-
+                //$.ajax({
+                //    url: queryURL,
+                //    method: "GET"
+                //}).done(function (response) {
+                //    $("#animals-view").text(JSON.stringify(response));
+                //});
+                renderButtons();
             });
+
+// ---------------------------------------------
+
+            renderButtons();
 
         </script>
     </div>
