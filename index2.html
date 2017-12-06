@@ -45,7 +45,7 @@
 
             // ---------------------------------------------
 
-            // Display Info *** ONLY THING NEEDED
+            // Display Info
 
             function displayAnimalInfo() {
                 var animal = $(this).attr("data-name");
@@ -56,10 +56,13 @@
                     url: queryURL,
                     method: "GET"
                 }).done(function (response) {
+                    // Clearing animals-view
+                    $("#animals-view").empty();
+
                     // Loop to make 10 gifs
                     for (var i = 0; i < 10; i++) {
 
-                        var animalDiv = $("<div class='animalGif'>"); // **
+                        var animalDiv = $("<div class='animalGif'>");
 
                         var pRating = $("<p>").text("Rated: " + response.data[i].rating);
                         animalDiv.append(pRating);
@@ -68,12 +71,11 @@
                         pGif.attr("data-reverse", response.data[i].images.original_still.url);
                         animalDiv.append(pGif);
 
-                        $("#animals-view").append(animalDiv); // **
+                        $("#animals-view").append(animalDiv);
                     }
                 });
             }
 
-            // WORKING
             // Checks if an img clicked, runs function
             $('body').on('click', 'img', function () {  // HERE NOW ONLY FOR TEST MOVE TO BOTTOM LATER
 
