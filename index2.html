@@ -83,6 +83,14 @@
 
 // ---------------------------------------------
 
+            function alertAnimalName() {
+                var animalName = $(this).attr("data-name");
+
+                alert(animalName);
+            }
+
+            $(document).on("click", ".animal", alertAnimalName);
+
             renderButtons();
 
         </script>
