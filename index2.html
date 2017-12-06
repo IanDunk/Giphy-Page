@@ -78,11 +78,8 @@
             $('body').on('click', 'img', function () {  // HERE NOW ONLY FOR TEST MOVE TO BOTTOM LATER
 
                 var reverseData = $(this).data().reverse;
-                $(this).attr("data-reverse", this.src);
-                //console.log(this.reverse);
-                //$(this).attr('src', reverseData);
+                $(this).data("reverse", this.src);
                 this.src = reverseData;
-                // WORK FIRST TIME AROUND .. I THINK ITS ADDING ANOTHER DATA REVERSE AND USING THE FIRST ONE STILL
             });
 
 
