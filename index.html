@@ -53,7 +53,7 @@
             function displayAnimalInfo() {
                 var animal = $(this).attr("data-name");
                 // constructing URL
-                var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=WOaFdtza6XVcrCuwcwTMkOM7JLBjEY1v&q=" + animal + "&limit=25&offset=0&rating=G&lang=en"; // part after animal may not be needed
+                var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=WOaFdtza6XVcrCuwcwTMkOM7JLBjEY1v&q=" + animal + "&limit=25&offset=0&rating=PG&lang=en"; // part after animal may not be needed
                 $.ajax({
                     url: queryURL,
                     method: "GET"
