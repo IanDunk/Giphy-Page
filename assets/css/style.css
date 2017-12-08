@@ -14,10 +14,16 @@ img {
 */
 
 
-#animal-form {
+#animal-form,
+#buttons-view {
     position: fixed;
 }
 
 .container {
     padding: 30px;
+}
+
+#animal-input,
+#find-animal {
+    float: right;
 }
