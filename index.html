@@ -56,20 +56,34 @@
                     // Clearing animals-view
                     $("#animals-view").empty();
                     // Loop to make 10 gifs
-                    for (var i = 0; i < 10; i++) { // GET THESE TO APPEND TO COL
+                    for (var i = 0; i < 10; i++) { // GET THESE TO APPEND TO COL and CENTER
+
+
+
+                        //if(response.data[i].slug.length > 1)
+                        var pTitle = response.data[i].slug;
+                        if(pTitle.indexOf("-") === -1) {
+                            pTitle = "Untitled";
+                        } else {
+                            pTitle = pTitle.slice(0, pTitle.lastIndexOf("-"));
+                            pTitle = pTitle.replace(/-/g, " "); // replace all "-" with " "
+
+                        }
+                        console.log(pTitle);
                         
+
+
+
+
                         var animalDiv = $("<div class='animalGif img-thumbnail'>");
-                        var pRating = $("<p>").text("Rated: " + response.data[i].rating);
+                        //var pRating = $("<div class 'caption'>").text("Rated: " + response.data[i].rating);// + " " + pTitle); // CHANGED P TO DIV CLASS CAPTION! CHANGE VAR NAME!
+                        var pRating = $("<div class 'caption'>").text(pTitle + " - Rated: " + response.data[i].rating);
                         animalDiv.append(pRating); // PANEL HEADING
+                       
                         var pGif = $("<img>").attr("src", response.data[i].images.fixed_height_still.url);
                         pGif.attr("data-reverse", response.data[i].images.fixed_height.url);
                         animalDiv.append(pGif);  // PANEL BODY
                         $("#animals-view").append(animalDiv);
-
-
-
-                        // ADDING TITLES delete str after last - in slug
-
 
                     }
                 });
