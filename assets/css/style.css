@@ -1,29 +1,24 @@
 /*
-#animals-view {
-    float: left;
-}
-
-/*
 img {
     float: left;
 }
-
+#animals-view,
 #buttons-view {
-    float: right;
+    width: 50px; 
+    float: right
 }
+
+It seems I can't get this to work where each col floats to the opposite sides of the screen.
+The animal search seems to be closer to the center of the screen than the photos.
 */
 
-
-#animal-form,
-#buttons-view {
-    position: fixed;
-}
-
 .container {
+    width: 80%; /* fixes the window from going full size when gifs loaded */
     padding: 30px;
 }
 
-#animal-input,
-#find-animal {
-    float: right;
+#animal-form,
+#buttons-view {
+    width: 300px;
+    position: fixed;
 }
