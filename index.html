@@ -16,6 +16,8 @@
     <!-- css: reset, style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
+    <script src="to-title-case.js"></script>
+
 </head>
 
 <body>
@@ -57,9 +59,6 @@
                     $("#animals-view").empty();
                     // Loop to make 10 gifs
                     for (var i = 0; i < 10; i++) { // GET THESE TO APPEND TO COL and CENTER
-
-
-
                         //if(response.data[i].slug.length > 1)
                         var pTitle = response.data[i].slug;
                         if(pTitle.indexOf("-") === -1) {
@@ -67,14 +66,10 @@
                         } else {
                             pTitle = pTitle.slice(0, pTitle.lastIndexOf("-"));
                             pTitle = pTitle.replace(/-/g, " "); // replace all "-" with " "
-
+                            pTitle = pTitle.toTitleCase();
                         }
                         console.log(pTitle);
                         
-
-
-
-
                         var animalDiv = $("<div class='animalGif img-thumbnail'>");
                         //var pRating = $("<div class 'caption'>").text("Rated: " + response.data[i].rating);// + " " + pTitle); // CHANGED P TO DIV CLASS CAPTION! CHANGE VAR NAME!
                         var pRating = $("<div class 'caption'>").text(pTitle + " - Rated: " + response.data[i].rating);
@@ -84,7 +79,6 @@
                         pGif.attr("data-reverse", response.data[i].images.fixed_height.url);
                         animalDiv.append(pGif);  // PANEL BODY
                         $("#animals-view").append(animalDiv);
-
                     }
                 });
             }
@@ -117,8 +111,6 @@
             // Trigger AJAX call on click
             $(document).on("click", ".animal", displayAnimalInfo);
             renderButtons();
-
-
             // MAKE SCRIPT.JS FILE!!!
         </script>
     </div>
